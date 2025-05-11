@@ -1,0 +1,95 @@
+<head>
+<meta charset="utf-8"/>
+</head>
+
+<body>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script type="text/javascript">
+
+
+
+    function getpeng(){
+        $.ajax({
+                url:'./peng_getpeng.php',
+                type:'POST',
+                data:{
+
+                }
+            })
+            // Ajaxリクエストが成功した時発動
+            .done( (data) => {
+                document.getElementById('peng').innerHTML = data;
+
+            })
+    };
+
+    function pingSelect(pengid){
+        $.ajax({
+                url:'./peng_pingSelect.php',
+                type:'POST',
+                data:{
+                    'pengid': pengid,
+                }
+            })
+            // Ajaxリクエストが成功した時発動
+            .done( (data) => {
+                document.getElementById('commentto').innerHTML = data;
+
+            })
+    };
+
+
+    window.onload = getpeng();
+    setInterval(getpeng(), 5000);
+
+    function ping(pengid){
+        $.ajax({
+                url:'./peng_ping.php',
+                type:'POST',
+                data:{
+                    'pengid': pengid,
+                    'text':$('#text').val(),
+                }
+            })
+            // Ajaxリクエストが成功した時発動
+            .done( (data) => {
+                getpeng();
+
+            })
+    };
+
+
+</script>
+
+<br><br>
+朋友圈
+<div class="peng" id="peng"></div>
+
+<div id="commentto">点击可评论
+</div>
+
+<style>
+    .peng{
+        width: 300px;
+        height: 500px;
+    }
+
+    .onepeng{
+        width: 300px;
+        height: auto;
+        border: 1px solid green;
+    }
+
+    .oneping{
+        width: auto;
+        height: auto;
+        font-size: smaller;
+        color: gray;
+    }
+</style>
+
+
+
+</body>

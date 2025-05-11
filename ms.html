@@ -1,0 +1,73 @@
+<head>
+    <meta charset="utf-8"/>
+</head>
+
+<body>
+<div class="d" id="ms">
+</div><br>
+<input type="text" id="text"></input>
+<button id="send">+</button>
+
+
+<style>
+    .d{
+        width: 300px;
+        height: 400px;
+        border: 1px solid green;
+    }
+</style>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script type="text/javascript">
+    var params  = new URLSearchParams(window.location.search);
+    var toid = params .get('friendId');
+    var fromid = params .get('id');
+    //var toid = 1005;
+    //var fromid = 1001;
+
+    $(function(){
+        // Ajax button click
+        $('#send').on('click',function(){
+            $.ajax({
+                url:'./ms.php',
+                type:'POST',
+                data:{
+                    'text':$('#text').val(),
+                    'fromid': fromid,
+                    'toid': toid,
+                }
+            })
+            // Ajaxリクエストが成功した時発動
+            .done( (data) => {
+                get();
+
+            })
+            // Ajaxリクエストが失敗した時発動
+            .fail( (data) => {
+                console.log("fail");
+            })
+        });
+    });
+
+    function get(){
+        $.ajax({
+                url:'./get.php',
+                type:'POST',
+                data:{
+                    'fromid': fromid,
+                    'toid': toid,
+                }
+            })
+            // Ajaxリクエストが成功した時発動
+            .done( (data) => {
+                document.getElementById('ms').innerHTML = data;
+
+            })
+    };
+
+    setInterval(get(), 1000);
+    window.onload = get();
+</script>
+
+</body>

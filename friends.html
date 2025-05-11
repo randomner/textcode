@@ -1,0 +1,55 @@
+<head>
+<meta charset="utf-8"/>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+</head>
+
+<body>
+<div class="friends" id="friends"></div>
+
+<button onclick="peng()">朋友圈</button>
+
+<style>
+    .friends{
+        width: 300px;
+        height: 400px;
+        border: 1px solid green;
+    }
+</style>
+
+<script type="text/javascript">
+    function getFriends(){
+        $.ajax({
+                url:'./friends.php',
+                type:'POST',
+                data:{
+                }
+            })
+            // Ajaxリクエストが成功した時発動
+            .done( (data) => {
+                document.getElementById('friends').innerHTML = data;
+
+            })
+    };
+
+    setInterval(getFriends(), 1000);
+    window.onload = getFriends;
+
+    function ms(id,friendId){
+       //window.location ="ms.html"+"?id="+id+"&friendId="+friendId;
+       window.location = `ms.html?id=${encodeURIComponent(id)}&friendId=${encodeURIComponent(friendId)}`;
+    };
+
+    function peng(){
+       //window.location ="ms.html"+"?id="+id+"&friendId="+friendId;
+       window.location = `peng.html`;
+    };
+</script>
+
+
+
+
+
+
+
+
+</body>

@@ -1,0 +1,104 @@
+<head>
+    <meta charset="utf-8"/>
+</head>
+
+<body>
+    <!--<form method="post" action="datatest.php">
+        <input type="text" name="id" value="id" />
+        <input type="submit" value="submit" />
+    </form>
+	-->
+
+    <br>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+	 <!--<script type="text/javascript">
+
+		$(function(){
+			// Ajax button click
+			$('#search').on('click',function(){
+				$.ajax({
+					url:'./search.php',
+					type:'POST',
+					data:{
+						'id':$('#id').val(),
+					}
+				})
+				// Ajaxリクエストが成功した時発動
+				.done( (data) => {
+					document.getElementById('res').innerHTML = data;
+
+				})
+				// Ajaxリクエストが失敗した時発動
+				.fail( (data) => {
+					console.log("fail");
+				})
+			});
+		});
+
+        function ad(){
+			// Ajax button click
+				$.ajax({
+					url:'./addFriend.php',
+					type:'POST',
+					data:{
+						'id':$('#id').val(),
+					}
+				})
+				// Ajaxリクエストが成功した時発動
+				.done( (data) => {
+					document.getElementById('res').innerHTML = data;
+				})
+		}
+    </script>
+
+   <input type="text" id="id" />
+    <button id="search">search</button>
+    <br>
+    <span id="res"></span>
+	<br>
+	-->
+
+	<strong>会员登录</strong><br>
+	信箱<br>
+	<input type="email" id="email"><br>
+	密码<br>
+	<input type="password" id="password"><br>
+	<button id="login">登录</button>
+	<br>
+	<span id="loginRes"></span>
+	<br>
+
+	<script type="text/javascript">
+
+		$(function(){
+			// Ajax button click
+			$('#login').on('click',function(){
+				$.ajax({
+					url:'./login.php',
+					type:'POST',
+					data:{
+						'email':$('#email').val(),
+						'password':$('#password').val(),
+					}
+				})
+				// Ajaxリクエストが成功した時発動
+				.done( (data) => {
+					//console.log(data);
+					//document.getElementById('loginRes').innerHTML = data;
+					if (data.success) {
+						window.location ="friends.html";
+					  }
+					  document.getElementById('loginRes').innerHTML = data.message;
+					
+				})
+				// Ajaxリクエストが失敗した時発動
+				.fail( (data) => {
+					console.log("fail");
+				})
+			});
+		});
+    </script>
+
+	
+</body>
